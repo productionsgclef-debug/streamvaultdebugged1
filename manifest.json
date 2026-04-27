@@ -1,0 +1,6 @@
+{
+  "name": "Streamvault",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [{"src": "https://placeholder.com", "sizes": "512x512"}]
+}
