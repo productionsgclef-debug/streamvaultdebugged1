@@ -4,20 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="manifest" href="/manifest.json">
-    <title>Streamvault Media</title>
+    <title>Streamvault | Secure Media</title>
     <style>
-        body { font-family: -apple-system, sans-serif; background: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .vault-card { border: 2px solid #333; padding: 40px; border-radius: 24px; text-align: center; background: #1e1e1e; }
-        .stream-icon { font-size: 60px; color: #E91E63; margin-bottom: 15px; }
-        .upload-zone { border: 2px dashed #444; padding: 20px; margin-top: 20px; border-radius: 12px; color: #888; }
+        body { 
+            font-family: -apple-system, sans-serif; 
+            background: #0f0f0f; 
+            color: #ffffff; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+        }
+        .vault-container { 
+            background: #1a1a1a; 
+            padding: 40px; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            text-align: center; 
+            border: 1px solid #333;
+            max-width: 350px;
+        }
+        .icon { font-size: 64px; margin-bottom: 20px; color: #ff0055; }
+        h1 { margin: 10px 0; font-size: 24px; letter-spacing: 1px; }
+        p { color: #888; font-size: 14px; line-height: 1.5; }
+        .status-badge { 
+            background: #222; 
+            color: #00ff88; 
+            padding: 8px 16px; 
+            border-radius: 20px; 
+            display: inline-block; 
+            font-size: 12px; 
+            margin-top: 20px;
+            border: 1px solid #00ff8833;
+        }
     </style>
 </head>
 <body>
-    <div class="vault-card">
-        <div class="stream-icon">🎥</div>
+    <div class="vault-container">
+        <div class="icon">🎬</div>
         <h1>Streamvault</h1>
-        <p>Your secure, private media storage.</p>
-        <div class="upload-zone">Drop files here to secure</div>
+        <p>Encrypted media storage and private streaming portal.</p>
+        <div class="status-badge">● System Secure</div>
     </div>
+
+    <!-- SERVICE WORKER SCRIPT INCLUDED BELOW -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('Streamvault SW Registered!'))
+                    .catch(err => console.log('Registration Failed', err));
+            });
+        }
+    </script>
 </body>
 </html>
+
