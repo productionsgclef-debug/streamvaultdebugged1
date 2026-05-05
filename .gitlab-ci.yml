@@ -1,0 +1,36 @@
+name: Crypto Project CI/CD
+
+# Trigger the pipeline on every push to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch: # Allows you to run this manually from the Actions tab
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Application
+        run: |
+          echo "Building your crypto project..."
+          # Add commands here (e.g., npm install or pip install)
+
+      - name: Run Tests
+        run: |
+          echo "Running security scans and tests..."
+          # Add test commands here
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-test # Only runs if build and test pass
+    environment: production
+    steps:
+      - name: Deploy to Server
+        run: |
+          echo "Deploying to production environment..."
+          # Add deployment commands (e.g., SSH, Docker, or Cloud CLI)
