@@ -1,31 +1,21 @@
-name: Crypto-Production-Pipeline
-
+name: Coinomi-Mining-Final
 on:
   push:
     branches: [ "main" ]
-  workflow_dispatch: # Allows you to run this manually
+  workflow_dispatch: 
 
 jobs:
-  main-pipeline:
+  crypto-job:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-
-      - name: Security Scan
-        run: |
-          echo "Scanning for exposed wallet keys or API secrets..."
-          # You can add tools like 'gitleaks' here later
-
-      - name: Build & Compile
-        run: |
-          echo "Building mining scripts and optimizing assets..."
-          mkdir -p dist
-          echo "Build successful" > dist/index.html
-
-      - name: Deploy to Server
-        if: github.ref == 'refs/heads/main'
-        run: |
-          echo "Deploying to your production environment..."
-          # Replace the line below with your actual deployment command
-          # Example: curl -X POST ${{ secrets.DEPLOY_HOOK_URL }}
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Run Script
+        env:
+          # This connects to the secret you saved earlier
+          WALLET_ADDRESS: ${{ secrets.COINOMI_WALLET_ADDRESS }}
+        run: python mining_task.py
